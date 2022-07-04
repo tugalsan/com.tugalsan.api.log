@@ -4,6 +4,7 @@ import com.tugalsan.api.compiler.client.*;
 import com.tugalsan.api.log.client.*;
 import com.tugalsan.api.pack.client.*;
 import com.tugalsan.api.string.client.*;
+import com.tugalsan.api.unsafe.client.*;
 import java.util.*;
 
 public class TS_Log implements TGS_LogInterface {
@@ -55,11 +56,7 @@ public class TS_Log implements TGS_LogInterface {
 
     @Override
     public void ct(CharSequence funcName, Throwable t) {
-        try {
-            debug(TGS_Log.TYPE_THR(), className, funcName, t);
-        } catch (Exception e) {
-            //NOTHING TODO
-        }
+        TGS_UnSafe.execute(() -> debug(TGS_Log.TYPE_THR(), className, funcName, t), e -> TGS_UnSafe.doNothing());
     }
 
     @Override
