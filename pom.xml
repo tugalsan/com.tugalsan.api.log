@@ -31,7 +31,7 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.google.elemental2</groupId>
+            <groupId>com.google.elemental2</groupId><!-- elemental2 2022.07.05 -->
             <artifactId>elemental2-dom</artifactId>
             <exclusions>
                 <exclusion>
