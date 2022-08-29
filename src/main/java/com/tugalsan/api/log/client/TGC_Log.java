@@ -21,7 +21,7 @@ public class TGC_Log implements TGS_LogInterface {
     }
 
     public TGC_Log(boolean infoEnable, Class clazz) {
-        this(infoEnable, clazz.equals(EntryPoint.class) ? clazz.getName() : clazz.getSimpleName());
+        this(infoEnable, TGS_Log.isFullNamed(clazz) ? clazz.getName() : clazz.getSimpleName());
     }
 
     private TGC_Log(boolean infoEnable, CharSequence className) {

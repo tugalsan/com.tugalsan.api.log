@@ -23,7 +23,7 @@ public class TS_Log implements TGS_LogInterface {
     }
 
     public TS_Log(boolean infoEnable, Class clazz) {
-        this(infoEnable, clazz.equals(ServletContextListener.class) ? clazz.getName() : clazz.getSimpleName());
+        this(infoEnable, TGS_Log.isFullNamed(clazz) ? clazz.getName() : clazz.getSimpleName());
     }
 
     private TS_Log(boolean infoEnable, CharSequence className) {
