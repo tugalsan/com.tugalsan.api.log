@@ -6,22 +6,27 @@ import com.tugalsan.api.pack.client.*;
 import com.tugalsan.api.string.client.*;
 import com.tugalsan.api.unsafe.client.*;
 import java.util.*;
+import javax.servlet.*;
 
 public class TS_Log implements TGS_LogInterface {
 
-    public static TS_Log of(CharSequence className) {
-        return new TS_Log(className);
+    public static TS_Log of(Class clazz) {
+        return new TS_Log(clazz);
     }
 
-    public static TS_Log of(boolean infoEnable, CharSequence className) {
-        return new TS_Log(infoEnable, className);
+    public static TS_Log of(boolean infoEnable, Class clazz) {
+        return new TS_Log(infoEnable, clazz);
     }
 
-    public TS_Log(CharSequence className) {
-        this(false, className);
+    public TS_Log(Class clazz) {
+        this(false, clazz);
     }
 
-    public TS_Log(boolean infoEnable, CharSequence className) {
+    public TS_Log(boolean infoEnable, Class clazz) {
+        this(infoEnable, clazz.equals(ServletContextListener.class) ? clazz.getName() : clazz.getSimpleName());
+    }
+
+    private TS_Log(boolean infoEnable, CharSequence className) {
         this.className = className.toString();
         this.infoEnable = infoEnable;
     }
@@ -34,6 +39,7 @@ public class TS_Log implements TGS_LogInterface {
         debug(TGS_Log.TYPE_LNK(), className, funcName, text, url);
     }
 
+    @Override
     public void ci(CharSequence funcName, TGS_Compiler<Object> compiler) {
         if (!infoEnable) {
             return;
@@ -73,15 +79,15 @@ public class TS_Log implements TGS_LogInterface {
             String str;
             if (o == null) {
                 str = String.valueOf(o);
-            } else if (o instanceof Throwable) {
-                str = TGS_StringUtils.toString((Throwable) o);
-            } else if (o instanceof List) {
+            } else if (o instanceof Throwable thr) {
+                str = TGS_StringUtils.toString(thr);
+            } else if (o instanceof List lst) {
                 var sjList = new StringJoiner("], [", "[", "]");
-                ((List) o).stream().forEachOrdered(oi -> sjList.add(String.valueOf(oi)));
+                lst.stream().forEachOrdered(oi -> sjList.add(String.valueOf(oi)));
                 str = sjList.toString();
-            } else if (o instanceof Object[]) {
+            } else if (o instanceof Object[] arr) {
                 var sjList = new StringJoiner("], [", "[", "]");
-                Arrays.stream((Object[]) o).forEachOrdered(oi -> sjList.add(String.valueOf(oi)));
+                Arrays.stream(arr).forEachOrdered(oi -> sjList.add(String.valueOf(oi)));
                 str = sjList.toString();
             } else {
                 str = String.valueOf(o);

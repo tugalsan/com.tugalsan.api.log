@@ -1,5 +1,6 @@
 package com.tugalsan.api.log.client;
 
+import com.google.gwt.core.client.*;
 import com.google.web.bindery.event.shared.UmbrellaException;
 import com.tugalsan.api.compiler.client.*;
 import com.tugalsan.api.string.client.*;
@@ -7,19 +8,23 @@ import java.util.*;
 
 public class TGC_Log implements TGS_LogInterface {
 
-    public static TGC_Log of(CharSequence className) {
-        return new TGC_Log(className);
+    public static TGC_Log of(Class clazz) {
+        return new TGC_Log(clazz);
     }
 
-    public static TGC_Log of(boolean infoEnable, CharSequence className) {
-        return new TGC_Log(infoEnable, className);
+    public static TGC_Log of(boolean infoEnable, Class clazz) {
+        return new TGC_Log(infoEnable, clazz);
     }
 
-    public TGC_Log(CharSequence className) {
-        this(false, className);
+    public TGC_Log(Class clazz) {
+        this(false, clazz);
     }
 
-    public TGC_Log(boolean infoEnable, CharSequence className) {
+    public TGC_Log(boolean infoEnable, Class clazz) {
+        this(infoEnable, clazz.equals(EntryPoint.class) ? clazz.getName() : clazz.getSimpleName());
+    }
+
+    private TGC_Log(boolean infoEnable, CharSequence className) {
         this.className = className.toString();
         this.infoEnable = infoEnable;
     }

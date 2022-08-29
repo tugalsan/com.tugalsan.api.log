@@ -1,4 +1,5 @@
 module com.tugalsan.api.log {
+    requires javax.servlet.api;
     requires elemental2.dom;
     requires org.fusesource.jansi;
     requires com.tugalsan.api.pack;
