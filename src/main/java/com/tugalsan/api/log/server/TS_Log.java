@@ -6,7 +6,7 @@ import com.tugalsan.api.pack.client.*;
 import com.tugalsan.api.string.client.*;
 import com.tugalsan.api.unsafe.client.*;
 import java.util.*;
-import javax.servlet.*;
+import java.util.stream.*;
 
 public class TS_Log implements TGS_LogInterface {
 
@@ -81,6 +81,10 @@ public class TS_Log implements TGS_LogInterface {
                 str = String.valueOf(o);
             } else if (o instanceof Throwable thr) {
                 str = TGS_StringUtils.toString(thr);
+            } else if (o instanceof Stream stream) {
+                var sjList = new StringJoiner("], [", "[", "]");
+                stream.forEachOrdered(oi -> sjList.add(String.valueOf(oi)));
+                str = sjList.toString();
             } else if (o instanceof List lst) {
                 var sjList = new StringJoiner("], [", "[", "]");
                 lst.stream().forEachOrdered(oi -> sjList.add(String.valueOf(oi)));

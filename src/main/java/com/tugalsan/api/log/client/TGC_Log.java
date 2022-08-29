@@ -1,10 +1,10 @@
 package com.tugalsan.api.log.client;
 
-import com.google.gwt.core.client.*;
 import com.google.web.bindery.event.shared.UmbrellaException;
 import com.tugalsan.api.compiler.client.*;
 import com.tugalsan.api.string.client.*;
 import java.util.*;
+import java.util.stream.*;
 
 public class TGC_Log implements TGS_LogInterface {
 
@@ -46,6 +46,7 @@ public class TGC_Log implements TGS_LogInterface {
         }
     }
 
+    @Override
     public void ci(CharSequence funcName, TGS_Compiler<Object> compiler) {
         if (!infoEnable) {
             return;
@@ -129,6 +130,10 @@ public class TGC_Log implements TGS_LogInterface {
                 str = String.valueOf(o);
             } else if (o instanceof Throwable) {
                 str = TGS_StringUtils.toString((Throwable) o);
+            } else if (o instanceof Stream) {
+                var sjList = new StringJoiner("], [", "[", "]");
+                ((Stream) o).forEachOrdered(oi -> sjList.add(String.valueOf(oi)));
+                str = sjList.toString();
             } else if (o instanceof List) {
                 var sjList = new StringJoiner("], [", "[", "]");
                 ((List) o).stream().forEachOrdered(oi -> sjList.add(String.valueOf(oi)));
