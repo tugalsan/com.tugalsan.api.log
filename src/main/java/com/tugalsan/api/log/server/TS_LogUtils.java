@@ -26,7 +26,8 @@ public class TS_LogUtils {
 
     private static void reset() {
         if (enableColoredCMD) {
-            System.out.print(Ansi.ansi().fg(Color.WHITE).boldOff());
+//            System.out.print(Ansi.ansi().fg(Color.WHITE).boldOff());
+            System.out.print(Ansi.ansi().reset());
         }
     }
 
