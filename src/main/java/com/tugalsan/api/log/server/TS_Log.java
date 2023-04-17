@@ -1,6 +1,6 @@
 package com.tugalsan.api.log.server;
 
-import com.tugalsan.api.compiler.client.*;
+import com.tugalsan.api.callable.client.*;
 import com.tugalsan.api.log.client.*;
 import com.tugalsan.api.pack.client.*;
 import com.tugalsan.api.string.client.*;
@@ -40,11 +40,11 @@ public class TS_Log implements TGS_LogInterface {
     }
 
     @Override
-    public void ci(CharSequence funcName, TGS_Compiler<Object> compiler) {
+    public void ci(CharSequence funcName, TGS_Callable<Object> callable) {
         if (!infoEnable) {
             return;
         }
-        ci(funcName, compiler.compile());
+        ci(funcName, callable.call());
     }
 
     @Override
@@ -62,7 +62,7 @@ public class TS_Log implements TGS_LogInterface {
 
     @Override
     public void ct(CharSequence funcName, Throwable t) {
-        TGS_UnSafe.execute(() -> debug(TGS_Log.TYPE_THR(), className, funcName, t), e -> TGS_UnSafe.doNothing());
+        TGS_UnSafe.run(() -> debug(TGS_Log.TYPE_THR(), className, funcName, t), e -> TGS_UnSafe.runNothing());
     }
 
     @Override

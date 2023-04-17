@@ -1,7 +1,7 @@
 package com.tugalsan.api.log.client;
 
 import com.google.web.bindery.event.shared.UmbrellaException;
-import com.tugalsan.api.compiler.client.*;
+import com.tugalsan.api.callable.client.*;
 import com.tugalsan.api.string.client.*;
 import java.util.*;
 import java.util.stream.*;
@@ -47,11 +47,11 @@ public class TGC_Log implements TGS_LogInterface {
     }
 
     @Override
-    public void ci(CharSequence funcName, TGS_Compiler<Object> compiler) {
+    public void ci(CharSequence funcName, TGS_Callable<Object> caller) {
         if (!infoEnable) {
             return;
         }
-        ci(funcName, compiler.compile());
+        ci(funcName, caller.call());
     }
 
     @Override

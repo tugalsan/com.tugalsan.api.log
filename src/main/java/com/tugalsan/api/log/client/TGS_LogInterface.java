@@ -1,6 +1,6 @@
 package com.tugalsan.api.log.client;
 
-import com.tugalsan.api.compiler.client.*;
+import com.tugalsan.api.callable.client.*;
 
 public interface TGS_LogInterface {
 
@@ -8,7 +8,7 @@ public interface TGS_LogInterface {
     public void cl(CharSequence fucName, CharSequence text, CharSequence url);
 
     /*console lazy info*/ 
-    public void ci(CharSequence funcName, TGS_Compiler<Object> compiler);
+    public void ci(CharSequence funcName, TGS_Callable<Object> callable);
 
     /*console info*/ 
     public void ci(CharSequence fucName, Object... oa);
