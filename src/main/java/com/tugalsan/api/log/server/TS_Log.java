@@ -2,7 +2,7 @@ package com.tugalsan.api.log.server;
 
 import com.tugalsan.api.callable.client.*;
 import com.tugalsan.api.log.client.*;
-import com.tugalsan.api.pack.client.*;
+import com.tugalsan.api.tuple.client.*;
 import com.tugalsan.api.string.client.*;
 import com.tugalsan.api.unsafe.client.*;
 import java.util.*;
@@ -121,17 +121,17 @@ public class TS_Log implements TGS_LogInterface {
         TS_LogUtils.plain(sjMain.toString());
     }
 
-    public TGS_Pack3<String, Boolean, String> createFuncBoolean(CharSequence funcName) {
-        return new TGS_Pack3(className + "." + funcName, false, "init");
+    public TGS_Tuple3<String, Boolean, String> createFuncBoolean(CharSequence funcName) {
+        return new TGS_Tuple3(className + "." + funcName, false, "init");
     }
 
-    public TGS_Pack3<String, Boolean, String> returnError(TGS_Pack3<String, Boolean, String> result, CharSequence errText) {
+    public TGS_Tuple3<String, Boolean, String> returnError(TGS_Tuple3<String, Boolean, String> result, CharSequence errText) {
         result.value2 = errText.toString();
         ce(result.value0, result.value2);
         return result;
     }
 
-    public TGS_Pack3<String, Boolean, String> returnTrue(TGS_Pack3<String, Boolean, String> result) {
+    public TGS_Tuple3<String, Boolean, String> returnTrue(TGS_Tuple3<String, Boolean, String> result) {
         result.value1 = true;
         return result;
     }

@@ -2,7 +2,7 @@ module com.tugalsan.api.log {
     requires javax.servlet.api;
     requires elemental2.dom;
     requires org.fusesource.jansi;
-    requires com.tugalsan.api.pack;
+    requires com.tugalsan.api.tuple;
     requires com.tugalsan.api.string;
     requires com.tugalsan.api.unsafe;
     requires com.tugalsan.api.callable;
