@@ -36,8 +36,8 @@
             <version>2.10.0</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>com.google.elemental2</groupId><!-- elemental2 2022.07.05 -->
+        <!-- <dependency>
+            <groupId>com.google.elemental2</groupId><!- - elemental2 2022.07.05 - ->
             <artifactId>elemental2-dom</artifactId>
             <exclusions>
                 <exclusion>
@@ -48,17 +48,17 @@
                     <groupId>com.google.jsinterop</groupId>
                     <artifactId>base</artifactId>
                 </exclusion>
-                <exclusion>
+                <!- - <exclusion> //GWT NEED IT
                     <groupId>com.google.elemental2</groupId>
                     <artifactId>elemental2-core</artifactId>
-                </exclusion>
-                <exclusion>
+                </exclusion> - ->
+                 <!- - <exclusion> //GWT NEED IT
                     <groupId>com.google.elemental2</groupId>
                     <artifactId>elemental2-promise</artifactId>
-                </exclusion>
+                </exclusion> - ->
             </exclusions>
-            <version>1.1.0</version>
-        </dependency>
+            <version>1.2.1</version><!- - 1.1.0 was working - ->
+        </dependency> -->
         <dependency>
             <groupId>org.fusesource.jansi</groupId>
             <artifactId>jansi</artifactId>
