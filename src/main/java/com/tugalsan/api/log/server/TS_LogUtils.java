@@ -1,9 +1,28 @@
 package com.tugalsan.api.log.server;
 
+import com.sun.jna.Platform;
+import com.tugalsan.api.unsafe.client.TGS_UnSafe;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import org.fusesource.jansi.Ansi.Color;
 import org.fusesource.jansi.*;
 
 public class TS_LogUtils {
+
+    public static PrintWriter printWriter() {
+        return TGS_UnSafe.call(() -> {
+            if (pritWriter == null) {
+                pritWriter = Platform.isWindows()
+                        ? new PrintWriter(new OutputStreamWriter(System.out, "Cp850"))
+                        : new PrintWriter(System.out);
+            }
+            return pritWriter;
+        }, e -> {
+            e.printStackTrace();
+            return null;
+        });
+    }
+    private static volatile PrintWriter pritWriter = null;
 
     public static void setColoredConsole(boolean enableColoredCMD) {
         TS_LogUtils.enableColoredCMD = enableColoredCMD;
@@ -26,68 +45,68 @@ public class TS_LogUtils {
 
     private static void reset() {
         if (enableColoredCMD) {
-//            System.out.print(Ansi.ansi().fg(Color.WHITE).boldOff());
-            System.out.print(Ansi.ansi().reset());
+//            printWriter().print(Ansi.ansi().fg(Color.WHITE).boldOff());
+            printWriter().print(Ansi.ansi().reset());
         }
     }
 
     public static void result(CharSequence text) {
         if (enableColoredCMD) {
-            System.out.println(Ansi.ansi().fg(Color.GREEN).bold().a(text));
+            printWriter().println(Ansi.ansi().fg(Color.GREEN).bold().a(text));
             reset();
         } else {
-            System.out.println(text);
+            printWriter().println(text);
         }
     }
 
     public static void error(CharSequence text) {
         if (enableColoredCMD) {
-            System.out.println(Ansi.ansi().fg(Color.RED).bold().a(text));
+            printWriter().println(Ansi.ansi().fg(Color.RED).bold().a(text));
             reset();
         } else {
-            System.out.println(text);
+            printWriter().println(text);
         }
     }
 
     public static void info(CharSequence text) {
         if (enableColoredCMD) {
-            System.out.println(Ansi.ansi().fg(Color.YELLOW).bold().a(text));
+            printWriter().println(Ansi.ansi().fg(Color.YELLOW).bold().a(text));
             reset();
         } else {
-            System.out.println(text);
+            printWriter().println(text);
         }
     }
 
     public static void link(CharSequence text) {
         if (enableColoredCMD) {
-            System.out.println(Ansi.ansi().fg(Color.BLUE).bold().a(text));
+            printWriter().println(Ansi.ansi().fg(Color.BLUE).bold().a(text));
             reset();
         } else {
-            System.out.println(text);
+            printWriter().println(text);
         }
     }
 
     public static void plain(CharSequence text) {
         if (enableColoredCMD) {
             reset();
-            System.out.println(text);
+            printWriter().println(text);
         } else {
-            System.out.println(text);
+            printWriter().println(text);
         }
     }
 
     public static void hidden(CharSequence text) {
         if (enableColoredCMD) {
-            System.out.println(Ansi.ansi().fg(Color.BLACK).bold().a(text));
+            printWriter().println(Ansi.ansi().fg(Color.BLACK).bold().a(text));
             reset();
         } else {
-            System.out.println(text);
+            printWriter().println(text);
         }
     }
 
     public static void clear() {
         if (enableColoredCMD) {
-            System.out.println(Ansi.ansi().eraseScreen());
+            printWriter().println(Ansi.ansi().eraseScreen());
         }
     }
 }
