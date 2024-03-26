@@ -1,7 +1,5 @@
 module com.tugalsan.api.log {
     requires javax.servlet.api;
-    requires com.sun.jna;
-    requires com.sun.jna.platform;
     requires org.fusesource.jansi;
     requires com.tugalsan.api.tuple;
     requires com.tugalsan.api.string;
