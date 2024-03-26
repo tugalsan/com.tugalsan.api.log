@@ -9,10 +9,13 @@ import org.fusesource.jansi.*;
 
 public class TS_LogUtils {
 
+    @Deprecated //NOT TESTED
+    public static boolean ENABLE_Cp850_FOR_WINDOWS = false;
+
     public static PrintWriter printWriter() {
         return TGS_UnSafe.call(() -> {
             if (pritWriter == null) {
-                pritWriter = Platform.isWindows()
+                pritWriter = (ENABLE_Cp850_FOR_WINDOWS && Platform.isWindows())
                         ? new PrintWriter(new OutputStreamWriter(System.out, "Cp850"))
                         : new PrintWriter(System.out);
             }
