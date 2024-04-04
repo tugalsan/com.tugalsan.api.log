@@ -4,7 +4,6 @@ import com.tugalsan.api.callable.client.*;
 import com.tugalsan.api.log.client.*;
 import com.tugalsan.api.tuple.client.*;
 import com.tugalsan.api.string.client.*;
-import com.tugalsan.api.unsafe.client.*;
 import java.util.*;
 import java.util.stream.*;
 
@@ -62,7 +61,7 @@ public class TS_Log implements TGS_LogInterface {
 
     @Override
     public void ct(CharSequence funcName, Throwable t) {
-        TGS_UnSafe.run(() -> debug(TGS_Log.TYPE_THR(), className, funcName, t), e -> TGS_UnSafe.runNothing());
+        debug(TGS_Log.TYPE_THR(), className, funcName, t);
     }
 
     @Override

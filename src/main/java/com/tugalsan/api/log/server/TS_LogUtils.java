@@ -1,20 +1,23 @@
 package com.tugalsan.api.log.server;
 
-import com.tugalsan.api.unsafe.client.TGS_UnSafe;
+import com.tugalsan.api.union.client.TGS_Union;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import org.fusesource.jansi.Ansi.Color;
 import org.fusesource.jansi.*;
 
 public class TS_LogUtils {
 
-    public static PrintWriter printWriterForWindows() {
-        return TGS_UnSafe.call(() -> {
-            if (pritWriter == null) {
+    public static TGS_Union<PrintWriter> printWriterForWindows() {
+        if (pritWriter == null) {
+            try {
                 pritWriter = new PrintWriter(new OutputStreamWriter(System.out, "Cp850"));
+            } catch (UnsupportedEncodingException ex) {
+                return TGS_Union.ofThrowable(ex);
             }
-            return pritWriter;
-        });
+        }
+        return TGS_Union.of(pritWriter);
     }
     @Deprecated //NOT TESTED
     public static boolean ENABLE_Cp850_FOR_WINDOWS = false;
@@ -35,7 +38,7 @@ public class TS_LogUtils {
             System.out.println(text);
         }
     }
-    
+
     private static void print(CharSequence text) {
         if (ENABLE_Cp850_FOR_WINDOWS) {
             pritWriter.print(text);
