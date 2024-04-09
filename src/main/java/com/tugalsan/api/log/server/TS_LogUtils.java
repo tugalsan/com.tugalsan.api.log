@@ -14,7 +14,7 @@ public class TS_LogUtils {
             try {
                 pritWriter = new PrintWriter(new OutputStreamWriter(System.out, "Cp850"));
             } catch (UnsupportedEncodingException ex) {
-                return TGS_Union.ofThrowable(ex);
+                return TGS_Union.ofExcuse(ex);
             }
         }
         return TGS_Union.of(pritWriter);
