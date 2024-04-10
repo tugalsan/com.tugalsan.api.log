@@ -1,6 +1,6 @@
 package com.tugalsan.api.log.server;
 
-import com.tugalsan.api.union.client.TGS_Union;
+import com.tugalsan.api.union.client.TGS_UnionExcuse;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -9,15 +9,15 @@ import org.fusesource.jansi.*;
 
 public class TS_LogUtils {
 
-    public static TGS_Union<PrintWriter> printWriterForWindows() {
+    public static TGS_UnionExcuse<PrintWriter> printWriterForWindows() {
         if (pritWriter == null) {
             try {
                 pritWriter = new PrintWriter(new OutputStreamWriter(System.out, "Cp850"));
             } catch (UnsupportedEncodingException ex) {
-                return TGS_Union.ofExcuse(ex);
+                return TGS_UnionExcuse.ofExcuse(ex);
             }
         }
-        return TGS_Union.of(pritWriter);
+        return TGS_UnionExcuse.of(pritWriter);
     }
     @Deprecated //NOT TESTED
     public static boolean ENABLE_Cp850_FOR_WINDOWS = false;
