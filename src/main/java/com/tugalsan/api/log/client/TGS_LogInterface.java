@@ -8,7 +8,7 @@ public interface TGS_LogInterface {
     public void cl(CharSequence fucName, CharSequence text, CharSequence url);
 
     /*console lazy info*/ 
-    public void ci(CharSequence funcName, TGS_Callable<Object> callable);
+    public void ci(CharSequence funcName, TGS_CallableType0<Object> callable);
 
     /*console info*/ 
     public void ci(CharSequence fucName, Object... oa);

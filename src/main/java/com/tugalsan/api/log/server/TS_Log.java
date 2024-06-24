@@ -40,7 +40,7 @@ public class TS_Log implements TGS_LogInterface {
     }
 
     @Override
-    public void ci(CharSequence funcName, TGS_Callable<Object> callable) {
+    public void ci(CharSequence funcName, TGS_CallableType0<Object> callable) {
         if (!infoEnable) {
             return;
         }
