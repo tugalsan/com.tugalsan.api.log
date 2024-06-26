@@ -129,7 +129,7 @@ public class TGC_Log implements TGS_LogInterface {
             if (o == null) {
                 str = String.valueOf(o);
             } else if (o instanceof Throwable) {
-                str = TGS_StringUtils.toString((Throwable) o);
+                str = TGS_StringUtils.cmn().toString((Throwable) o);
             } else if (o instanceof Stream) {
                 var sjList = new StringJoiner("], [", "[", "]");
                 ((Stream) o).forEachOrdered(oi -> sjList.add(String.valueOf(oi)));

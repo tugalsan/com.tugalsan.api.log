@@ -80,7 +80,7 @@ public class TS_Log implements TGS_LogInterface {
             if (o == null) {
                 str = String.valueOf(o);
             } else if (o instanceof Throwable thr) {
-                str = TGS_StringUtils.toString(thr);
+                str = TGS_StringUtils.cmn().toString(thr);
             } else if (o instanceof Stream stream) {
                 var sjList = new StringJoiner("], [", "[", "]");
                 stream.forEachOrdered(oi -> sjList.add(String.valueOf(oi)));
