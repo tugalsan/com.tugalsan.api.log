@@ -1,6 +1,6 @@
 package com.tugalsan.api.log.server;
 
-import com.tugalsan.api.callable.client.*;
+import com.tugalsan.api.function.client.*;
 import com.tugalsan.api.log.client.*;
 import com.tugalsan.api.tuple.client.*;
 import com.tugalsan.api.string.client.*;
@@ -40,7 +40,7 @@ public class TS_Log implements TGS_LogInterface {
     }
 
     @Override
-    public void ci(CharSequence funcName, TGS_CallableType0<Object> callable) {
+    public void ci(CharSequence funcName, TGS_Func_OutTyped<Object> callable) {
         if (!infoEnable) {
             return;
         }
