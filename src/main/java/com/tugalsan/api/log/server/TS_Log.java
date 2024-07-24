@@ -62,7 +62,7 @@ public class TS_Log implements TGS_LogInterface {
 
     @Override
     public void ct(CharSequence funcName, Throwable t) {
-        TGS_UnSafe.run(() -> debug(TGS_Log.TYPE_THR(), className, funcName, t), e -> TGS_UnSafe.runNothing());
+        TGS_UnSafe.run(() -> debug(TGS_Log.TYPE_THR(), className, funcName, t), e -> TGS_Func.empty.run());
     }
 
     @Override
