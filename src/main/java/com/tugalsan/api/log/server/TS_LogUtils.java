@@ -1,5 +1,6 @@
 package com.tugalsan.api.log.server;
 
+import com.tugalsan.api.function.client.TGS_Func_OutTyped_In1;
 import com.tugalsan.api.unsafe.client.TGS_UnSafe;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -7,6 +8,8 @@ import org.fusesource.jansi.Ansi.Color;
 import org.fusesource.jansi.*;
 
 public class TS_LogUtils {
+
+    public static volatile TGS_Func_OutTyped_In1<CharSequence, CharSequence> MAP = val -> val;
 
     public static PrintWriter printWriterForWindows() {
         return TGS_UnSafe.call(() -> {
@@ -35,7 +38,7 @@ public class TS_LogUtils {
             System.out.println(text);
         }
     }
-    
+
     private static void print(CharSequence text) {
         if (ENABLE_Cp850_FOR_WINDOWS) {
             pritWriter.print(text);
@@ -79,6 +82,7 @@ public class TS_LogUtils {
     }
 
     public static void result(CharSequence text) {
+        text = MAP.call(text);
         if (enableColoredCMD) {
             println(Ansi.ansi().fg(Color.GREEN).bold().a(text));
             reset();
@@ -88,6 +92,7 @@ public class TS_LogUtils {
     }
 
     public static void error(CharSequence text) {
+        text = MAP.call(text);
         if (enableColoredCMD) {
             println(Ansi.ansi().fg(Color.RED).bold().a(text));
             reset();
@@ -97,6 +102,7 @@ public class TS_LogUtils {
     }
 
     public static void info(CharSequence text) {
+        text = MAP.call(text);
         if (enableColoredCMD) {
             println(Ansi.ansi().fg(Color.YELLOW).bold().a(text));
             reset();
@@ -106,6 +112,7 @@ public class TS_LogUtils {
     }
 
     public static void link(CharSequence text) {
+        text = MAP.call(text);
         if (enableColoredCMD) {
             println(Ansi.ansi().fg(Color.BLUE).bold().a(text));
             reset();
@@ -115,6 +122,7 @@ public class TS_LogUtils {
     }
 
     public static void plain(CharSequence text) {
+        text = MAP.call(text);
         if (enableColoredCMD) {
             reset();
             println(text);
@@ -124,6 +132,7 @@ public class TS_LogUtils {
     }
 
     public static void hidden(CharSequence text) {
+        text = MAP.call(text);
         if (enableColoredCMD) {
             println(Ansi.ansi().fg(Color.BLACK).bold().a(text));
             reset();
