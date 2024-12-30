@@ -2,7 +2,6 @@ package com.tugalsan.api.log.server;
 
 import com.tugalsan.api.function.client.*;
 import com.tugalsan.api.log.client.*;
-import com.tugalsan.api.tuple.client.*;
 import com.tugalsan.api.string.client.*;
 import com.tugalsan.api.unsafe.client.*;
 import java.util.*;
@@ -121,18 +120,35 @@ public class TS_Log implements TGS_LogInterface {
         TS_LogUtils.plain(sjMain.toString());
     }
 
-    public TGS_Tuple3<String, Boolean, String> createFuncBoolean(CharSequence funcName) {
-        return new TGS_Tuple3(className + "." + funcName, false, "init");
+    public Result_withLog createFuncBoolean(CharSequence funcName) {
+        return Result_withLog.of(className + "." + funcName, false, "init");
     }
 
-    public TGS_Tuple3<String, Boolean, String> returnError(TGS_Tuple3<String, Boolean, String> result, CharSequence errText) {
-        result.value2 = errText.toString();
-        ce(result.value0, result.value2);
+    public static class Result_withLog {
+
+        private Result_withLog(String classNameDotfuncName, boolean result, CharSequence log) {
+            this.classNameDotfuncName = classNameDotfuncName;
+            this.result = result;
+            this.log = log;
+        }
+
+        public static Result_withLog of(String classNameDotfuncName, boolean result, CharSequence log) {
+            return new Result_withLog(classNameDotfuncName, result, log);
+        }
+
+        public String classNameDotfuncName;//val0
+        public boolean result;//val1
+        public CharSequence log;//val2
+    }
+
+    public Result_withLog returnError(Result_withLog result, CharSequence errText) {
+        result.log = errText;
+        ce(result.classNameDotfuncName, result.log);
         return result;
     }
 
-    public TGS_Tuple3<String, Boolean, String> returnTrue(TGS_Tuple3<String, Boolean, String> result) {
-        result.value1 = true;
+    public Result_withLog returnTrue(Result_withLog result) {
+        result.result = true;
         return result;
     }
 }
