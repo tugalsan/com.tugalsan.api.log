@@ -139,16 +139,17 @@ public class TS_Log implements TGS_LogInterface {
         public String classNameDotfuncName;//val0
         public boolean result;//val1
         public CharSequence log;//val2
-    }
 
-    public Result_withLog returnError(Result_withLog result, CharSequence errText) {
-        result.log = errText;
-        ce(result.classNameDotfuncName, result.log);
-        return result;
-    }
+        public Result_withLog mutate2Error(CharSequence errText) {
+            log = errText;
+            debug(TGS_Log.TYPE_ERR(), classNameDotfuncName, log);
+            return this;
+        }
 
-    public Result_withLog returnTrue(Result_withLog result) {
-        result.result = true;
-        return result;
+        public Result_withLog mutate2True() {
+            result = true;
+            return this;
+        }
+
     }
 }
