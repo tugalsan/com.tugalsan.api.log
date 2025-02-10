@@ -1,6 +1,6 @@
 package com.tugalsan.api.log.client;
 
-import com.tugalsan.api.function.client.*;
+import com.tugalsan.api.function.client.maythrow.uncheckedexceptions.TGS_FuncMTUCE_OutTyped;
 
 public interface TGS_LogInterface {
 
@@ -8,7 +8,7 @@ public interface TGS_LogInterface {
     public void cl(CharSequence fucName, CharSequence text, CharSequence url);
 
     /*console lazy info*/ 
-    public void ci(CharSequence funcName, TGS_Func_OutTyped<Object> callable);
+    public void ci(CharSequence funcName, TGS_FuncMTUCE_OutTyped<Object> callable);
 
     /*console info*/ 
     public void ci(CharSequence fucName, Object... oa);

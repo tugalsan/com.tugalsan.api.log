@@ -1,7 +1,7 @@
 package com.tugalsan.api.log.server;
 
-import com.tugalsan.api.function.client.TGS_Func_OutTyped_In1;
-import com.tugalsan.api.unsafe.client.TGS_UnSafe;
+import com.tugalsan.api.function.client.maythrow.checkedexceptions.TGS_FuncMTCEUtils;
+import com.tugalsan.api.function.client.maythrow.uncheckedexceptions.TGS_FuncMTUCE_OutTyped_In1;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import org.fusesource.jansi.Ansi.Color;
@@ -9,10 +9,10 @@ import org.fusesource.jansi.*;
 
 public class TS_LogUtils {
 
-    public static volatile TGS_Func_OutTyped_In1<CharSequence, CharSequence> MAP = val -> val;
+    public static volatile TGS_FuncMTUCE_OutTyped_In1<CharSequence, CharSequence> MAP = val -> val;
 
     public static PrintWriter printWriterForWindows() {
-        return TGS_UnSafe.call(() -> {
+        return TGS_FuncMTCEUtils.call(() -> {
             if (pritWriter == null) {
                 pritWriter = new PrintWriter(new OutputStreamWriter(System.out, "Cp850"));
             }

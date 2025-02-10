@@ -1,11 +1,13 @@
 package com.tugalsan.api.log.server;
 
-import com.tugalsan.api.function.client.*;
 import com.tugalsan.api.log.client.*;
 import com.tugalsan.api.string.client.*;
-import com.tugalsan.api.unsafe.client.*;
+
 import java.util.*;
 import java.util.stream.*;
+import com.tugalsan.api.function.client.maythrow.uncheckedexceptions.TGS_FuncMTUCE;
+import com.tugalsan.api.function.client.maythrow.checkedexceptions.TGS_FuncMTCEUtils;
+import com.tugalsan.api.function.client.maythrow.uncheckedexceptions.TGS_FuncMTUCE_OutTyped;
 
 public class TS_Log implements TGS_LogInterface {
 
@@ -39,7 +41,7 @@ public class TS_Log implements TGS_LogInterface {
     }
 
     @Override
-    public void ci(CharSequence funcName, TGS_Func_OutTyped<Object> callable) {
+    public void ci(CharSequence funcName, TGS_FuncMTUCE_OutTyped<Object> callable) {
         if (!infoEnable) {
             return;
         }
@@ -61,7 +63,7 @@ public class TS_Log implements TGS_LogInterface {
 
     @Override
     public void ct(CharSequence funcName, Throwable t) {
-        TGS_UnSafe.run(() -> debug(TGS_Log.TYPE_THR(), className, funcName, t), e -> TGS_Func.empty.run());
+        TGS_FuncMTCEUtils.run(() -> debug(TGS_Log.TYPE_THR(), className, funcName, t), e -> TGS_FuncMTUCE.empty.run());
     }
 
     @Override
