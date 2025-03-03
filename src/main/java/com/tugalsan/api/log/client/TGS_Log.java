@@ -10,7 +10,7 @@ public class TGS_Log {
     ));
 
     public static boolean isFullNamed(Class clazz) {
-        return FULL_NAMED_CLASSES.stream().filter(cn -> clazz.getSimpleName().equals(cn)).findAny().isPresent();
+        return FULL_NAMED_CLASSES.stream().anyMatch(cn -> clazz.getSimpleName().equals(cn));
     }
 
     public static int TYPE_LNK() {
