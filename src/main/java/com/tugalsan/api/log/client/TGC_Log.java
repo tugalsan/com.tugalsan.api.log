@@ -119,6 +119,7 @@ public class TGC_Log implements TGS_LogInterface {
         }
     }
 
+    @Deprecated //DONT FORGET TO ADD d.className
     public static void debug(int type, Object... oa) {
         if (oa == null || oa.length == 0) {
             return;
