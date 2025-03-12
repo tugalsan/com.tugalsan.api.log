@@ -71,7 +71,7 @@ public class TS_Log implements TGS_LogInterface {
         debug(TGS_Log.TYPE_ERR(), className, funcName, oa);
     }
 
-    private static void debug(int type, Object... oa) {
+    public static void debug(int type, Object... oa) {
         if (oa == null || oa.length == 0) {
             return;
         }
