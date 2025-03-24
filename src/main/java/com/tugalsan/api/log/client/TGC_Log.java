@@ -4,7 +4,7 @@ import com.google.web.bindery.event.shared.UmbrellaException;
 import com.tugalsan.api.string.client.*;
 import java.util.*;
 import java.util.stream.*;
-import com.tugalsan.api.function.client.maythrow.uncheckedexceptions.TGS_FuncMTUCE_OutTyped;
+import com.tugalsan.api.function.client.maythrowexceptions.unchecked.TGS_FuncMTU_OutTyped;
 
 public class TGC_Log implements TGS_LogInterface {
 
@@ -47,7 +47,7 @@ public class TGC_Log implements TGS_LogInterface {
     }
 
     @Override
-    public void ci(CharSequence funcName, TGS_FuncMTUCE_OutTyped<Object> caller) {
+    public void ci(CharSequence funcName, TGS_FuncMTU_OutTyped<Object> caller) {
         if (!infoEnable) {
             return;
         }
