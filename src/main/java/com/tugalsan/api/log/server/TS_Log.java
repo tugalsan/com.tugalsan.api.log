@@ -11,43 +11,46 @@ import java.util.function.Supplier;
 
 public class TS_Log implements TGS_LogInterface {
 
-    public static Supplier<TS_Log> ofStableSupplier(Class clazz) {
-        return ofStableSupplier(false, clazz);
+    @Deprecated //COMPATABILITY
+    public TS_Log get() {
+        return this;
     }
 
-    public static Supplier<TS_Log> ofStableSupplier(boolean infoEnable, Class clazz) {
-        return StableValue.supplier(() -> TS_Log.of(infoEnable, clazz));
+    public String className() {
+        return classNameSupplier.get();
+    }
+    final private Supplier<String> classNameSupplier;
+    public boolean infoEnable = false;
+
+    private TS_Log(boolean infoEnable, Class clazz) {
+        this.classNameSupplier = StableValue.supplier(() -> TGS_Log.isFullNamed(clazz) ? clazz.getName() : clazz.getSimpleName());
+        this.infoEnable = infoEnable;
     }
 
-    @Deprecated
+    private TS_Log(boolean infoEnable, CharSequence className) {
+        this.classNameSupplier = StableValue.supplier(() -> className.toString());
+        this.infoEnable = infoEnable;
+    }
+
     public static TS_Log of(Class clazz) {
-        return new TS_Log(clazz);
+        return of(false, clazz);
     }
 
-    @Deprecated
     public static TS_Log of(boolean infoEnable, Class clazz) {
         return new TS_Log(infoEnable, clazz);
     }
 
-    public TS_Log(Class clazz) {
-        this(false, clazz);
+    public static TS_Log of(String clazzName) {
+        return of(false, clazzName);
     }
 
-    public TS_Log(boolean infoEnable, Class clazz) {
-        this(infoEnable, TGS_Log.isFullNamed(clazz) ? clazz.getName() : clazz.getSimpleName());
+    public static TS_Log of(boolean infoEnable, String clazzName) {
+        return new TS_Log(infoEnable, clazzName);
     }
-
-    private TS_Log(boolean infoEnable, CharSequence className) {
-        this.className = className.toString();
-        this.infoEnable = infoEnable;
-    }
-    final public String className;
-
-    public boolean infoEnable = false;
 
     @Override
     public void cl(CharSequence funcName, CharSequence text, CharSequence url) {
-        debug(TGS_Log.TYPE_LNK(), className, funcName, text, url);
+        debug(TGS_Log.TYPE_LNK(), className(), funcName, text, url);
     }
 
     @Override
@@ -63,22 +66,22 @@ public class TS_Log implements TGS_LogInterface {
         if (!infoEnable) {
             return;
         }
-        debug(TGS_Log.TYPE_INF(), className, funcName, oa);
+        debug(TGS_Log.TYPE_INF(), className(), funcName, oa);
     }
 
     @Override
     public void cr(CharSequence funcName, Object... oa) {
-        debug(TGS_Log.TYPE_RES(), className, funcName, oa);
+        debug(TGS_Log.TYPE_RES(), className(), funcName, oa);
     }
 
     @Override
     public void ct(CharSequence funcName, Throwable t) {
-        TGS_FuncMTCUtils.run(() -> debug(TGS_Log.TYPE_THR(), className, funcName, t), e -> TGS_FuncMTU.empty.run());
+        TGS_FuncMTCUtils.run(() -> debug(TGS_Log.TYPE_THR(), className(), funcName, t), e -> TGS_FuncMTU.empty.run());
     }
 
     @Override
     public void ce(CharSequence funcName, Object... oa) {
-        debug(TGS_Log.TYPE_ERR(), className, funcName, oa);
+        debug(TGS_Log.TYPE_ERR(), className(), funcName, oa);
     }
 
     @Deprecated //DONT FORGET TO ADD d.className
@@ -134,7 +137,7 @@ public class TS_Log implements TGS_LogInterface {
     }
 
     public Result_withLog createFuncBoolean(CharSequence funcName) {
-        return Result_withLog.of(className + "." + funcName, false, "init");
+        return Result_withLog.of(className() + "." + funcName, false, "init");
     }
 
     public static class Result_withLog {
