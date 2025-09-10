@@ -8,13 +8,24 @@ import java.util.stream.*;
 import com.tugalsan.api.function.client.maythrowexceptions.unchecked.TGS_FuncMTU;
 import com.tugalsan.api.function.client.maythrowexceptions.checked.TGS_FuncMTCUtils;
 import com.tugalsan.api.function.client.maythrowexceptions.unchecked.TGS_FuncMTU_OutTyped;
+import java.util.function.Supplier;
 
 public class TS_Log implements TGS_LogInterface {
 
+    public static Supplier<TS_Log> ofStableSupplier(Class clazz) {
+        return ofStableSupplier(false, clazz)
+    }
+
+    public static Supplier<TS_Log> ofStableSupplier(boolean infoEnable, Class clazz) {
+        return StableValue.supplier(() -> TS_Log.of(infoEnable, Main.class));
+    }
+
+    @Deprecated
     public static TS_Log of(Class clazz) {
         return new TS_Log(clazz);
     }
 
+    @Deprecated
     public static TS_Log of(boolean infoEnable, Class clazz) {
         return new TS_Log(infoEnable, clazz);
     }
