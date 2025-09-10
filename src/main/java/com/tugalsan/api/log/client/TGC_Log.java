@@ -5,38 +5,49 @@ import com.tugalsan.api.string.client.*;
 import java.util.*;
 import java.util.stream.*;
 import com.tugalsan.api.function.client.maythrowexceptions.unchecked.TGS_FuncMTU_OutTyped;
+import java.util.function.Supplier;
 
 public class TGC_Log implements TGS_LogInterface {
 
+    public String className() {
+        return classNameSupplier.get();
+    }
+    final private Supplier<String> classNameSupplier;
+    public boolean infoEnable = false;
+
+    private TGC_Log(boolean infoEnable, Class clazz) {
+        this.classNameSupplier = StableValue.supplier(() -> TGS_Log.isFullNamed(clazz) ? clazz.getName() : clazz.getSimpleName());
+        this.infoEnable = infoEnable;
+    }
+
+    private TGC_Log(boolean infoEnable, CharSequence className) {
+        this.classNameSupplier = StableValue.supplier(() -> className.toString());
+        this.infoEnable = infoEnable;
+    }
+
     public static TGC_Log of(Class clazz) {
-        return new TGC_Log(clazz);
+        return of(false, clazz);
     }
 
     public static TGC_Log of(boolean infoEnable, Class clazz) {
         return new TGC_Log(infoEnable, clazz);
     }
 
-    public TGC_Log(Class clazz) {
-        this(false, clazz);
+    public static TGC_Log of(String clazzName) {
+        return of(false, clazzName);
     }
 
-    public TGC_Log(boolean infoEnable, Class clazz) {
-        this(infoEnable, TGS_Log.isFullNamed(clazz) ? clazz.getName() : clazz.getSimpleName());
+    public static TGC_Log of(boolean infoEnable, String clazzName) {
+        return new TGC_Log(infoEnable, clazzName);
     }
 
-    private TGC_Log(boolean infoEnable, CharSequence className) {
-        this.className = className.toString();
-        this.infoEnable = infoEnable;
-    }
-    final public String className;
     public static TGS_LogInterface debugGUI = null;
 
-    public boolean infoEnable = false;
     public boolean showDebugGUINull = false;
 
     @Override
     public void cl(CharSequence funcName, CharSequence text, CharSequence url) {
-        debug(TGS_Log.TYPE_LNK(), className, funcName, text, url);
+        debug(TGS_Log.TYPE_LNK(), className(), funcName, text, url);
         if (debugGUI != null) {
             debugGUI.cl(funcName, text, url);
         } else {
@@ -59,7 +70,7 @@ public class TGC_Log implements TGS_LogInterface {
         if (!infoEnable) {
             return;
         }
-        debug(TGS_Log.TYPE_INF(), className, funcName, oa);
+        debug(TGS_Log.TYPE_INF(), className(), funcName, oa);
         if (debugGUI != null) {
             debugGUI.ci(funcName, oa);
         } else {
@@ -71,7 +82,7 @@ public class TGC_Log implements TGS_LogInterface {
 
     @Override
     public void cr(CharSequence funcName, Object... oa) {
-        debug(TGS_Log.TYPE_RES(), className, funcName, oa);
+        debug(TGS_Log.TYPE_RES(), className(), funcName, oa);
         if (debugGUI != null) {
             debugGUI.cr(funcName, oa);
         } else {
@@ -84,7 +95,7 @@ public class TGC_Log implements TGS_LogInterface {
     @Override
     public void ct(CharSequence funcName, Throwable t) {
         t = unwrap(t);
-        debug(TGS_Log.TYPE_THR(), className, funcName, t);
+        debug(TGS_Log.TYPE_THR(), className(), funcName, t);
         if (debugGUI != null) {
             debugGUI.ct(funcName, t);
         } else {
@@ -109,7 +120,7 @@ public class TGC_Log implements TGS_LogInterface {
 
     @Override
     public void ce(CharSequence funcName, Object... oa) {
-        debug(TGS_Log.TYPE_ERR(), className, funcName, oa);
+        debug(TGS_Log.TYPE_ERR(), className(), funcName, oa);
         if (debugGUI != null) {
             debugGUI.ce(funcName, oa);
         } else {

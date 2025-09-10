@@ -11,11 +11,6 @@ import java.util.function.Supplier;
 
 public class TS_Log implements TGS_LogInterface {
 
-    @Deprecated //COMPATABILITY
-    public TS_Log get() {
-        return this;
-    }
-
     public String className() {
         return classNameSupplier.get();
     }
