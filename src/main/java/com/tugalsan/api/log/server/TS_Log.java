@@ -2,7 +2,6 @@ package com.tugalsan.api.log.server;
 
 import com.tugalsan.api.log.client.*;
 import com.tugalsan.api.string.client.*;
-
 import java.util.*;
 import java.util.stream.*;
 import com.tugalsan.api.function.client.maythrowexceptions.unchecked.TGS_FuncMTU;
@@ -13,11 +12,11 @@ import java.util.function.Supplier;
 public class TS_Log implements TGS_LogInterface {
 
     public static Supplier<TS_Log> ofStableSupplier(Class clazz) {
-        return ofStableSupplier(false, clazz)
+        return ofStableSupplier(false, clazz);
     }
 
     public static Supplier<TS_Log> ofStableSupplier(boolean infoEnable, Class clazz) {
-        return StableValue.supplier(() -> TS_Log.of(infoEnable, Main.class));
+        return StableValue.supplier(() -> TS_Log.of(infoEnable, clazz));
     }
 
     @Deprecated
