@@ -131,10 +131,12 @@ public class TS_Log implements TGS_LogInterface {
         TS_LogUtils.plain(sjMain.toString());
     }
 
+    @Deprecated //TOO COMPLEX
     public Result_withLog createFuncBoolean(CharSequence funcName) {
         return Result_withLog.of(className() + "." + funcName, false, "init");
     }
 
+    @Deprecated //TOO COMPLEX
     public static class Result_withLog {
 
         private Result_withLog(String classNameDotfuncName, boolean result, CharSequence log) {
