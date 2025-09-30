@@ -1,11 +1,9 @@
 package com.tugalsan.api.log.server;
 
-import com.tugalsan.api.function.client.maythrowexceptions.checked.TGS_FuncMTCUtils;
-import com.tugalsan.api.function.client.maythrowexceptions.unchecked.TGS_FuncMTU_OutTyped_In1;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
+import module com.tugalsan.api.function;
+import module org.fusesource.jansi;
 import org.fusesource.jansi.Ansi.Color;
-import org.fusesource.jansi.*;
+import java.io.*;
 
 public class TS_LogUtils {
 

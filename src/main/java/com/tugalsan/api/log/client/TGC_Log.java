@@ -1,10 +1,10 @@
 package com.tugalsan.api.log.client;
 
-import com.google.web.bindery.event.shared.UmbrellaException;
 import com.tugalsan.api.string.client.*;
+import com.tugalsan.api.function.client.maythrowexceptions.unchecked.TGS_FuncMTU_OutTyped;
+import com.google.web.bindery.event.shared.UmbrellaException;
 import java.util.*;
 import java.util.stream.*;
-import com.tugalsan.api.function.client.maythrowexceptions.unchecked.TGS_FuncMTU_OutTyped;
 import java.util.function.Supplier;
 
 public class TGC_Log implements TGS_LogInterface {
