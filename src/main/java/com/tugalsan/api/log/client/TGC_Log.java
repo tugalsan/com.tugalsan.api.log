@@ -65,6 +65,10 @@ public class TGC_Log implements TGS_LogInterface {
         ci(funcName, caller.call());
     }
 
+    public static void consoleOnly(Object... oa) {
+        debug(TGS_Log.TYPE_INF(), oa);
+    }
+
     @Override
     public void ci(CharSequence funcName, Object... oa) {
         if (!infoEnable) {
