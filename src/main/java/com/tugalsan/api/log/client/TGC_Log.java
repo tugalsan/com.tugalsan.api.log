@@ -65,7 +65,13 @@ public class TGC_Log implements TGS_LogInterface {
         ci(funcName, caller.call());
     }
 
-    public static void consoleOnly(Object... oa) {
+    public void consoleOnly_ci_ifInfoEnable(Object... oa) {
+        if (infoEnable) {
+            consoleOnly_ci_always(oa);
+        }
+    }
+
+    public void consoleOnly_ci_always(Object... oa) {
         debug(TGS_Log.TYPE_INF(), oa);
     }
 
@@ -74,7 +80,7 @@ public class TGC_Log implements TGS_LogInterface {
         if (!infoEnable) {
             return;
         }
-        debug(TGS_Log.TYPE_INF(), className(), funcName, oa);
+        consoleOnly_ci_always(className(), funcName, oa);
         if (debugGUI != null) {
             debugGUI.ci(funcName, oa);
         } else {
