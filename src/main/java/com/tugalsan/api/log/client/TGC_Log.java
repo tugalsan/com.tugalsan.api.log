@@ -66,9 +66,10 @@ public class TGC_Log implements TGS_LogInterface {
     }
 
     public void consoleOnly_ci_ifInfoEnable(CharSequence funcName, Object... oa) {
-        if (infoEnable) {
-            consoleOnly_ci_always(funcName, oa);
+        if (!infoEnable) {
+            return;
         }
+        consoleOnly_ci_always(funcName, oa);
     }
 
     public void consoleOnly_ci_always(CharSequence funcName, Object... oa) {
